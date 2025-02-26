@@ -8,6 +8,19 @@ import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
 import { useAuthStore } from './src/store/useAuthStore';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack'; // Correct import
+
+import { Button, Pressable, Text, View } from 'react-native';
+import Home from './src/screens/auth/Home';
+import ProvideInformation from './src/screens/auth/ProvideInformation';
+import WantToRegister from './src/screens/auth/WantToRegister';
+import RegisterPage from './src/screens/auth/RegisterPage';
+import RegisterPage2 from './src/screens/auth/RegisterPage2';
+import RegisterVerification from './src/screens/auth/RegisterVerification';
+import VerificationCode from './src/screens/auth/VerificationCode';
+
+const Stack = createNativeStackNavigator(); // Create the stack navigator
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
