@@ -5,10 +5,14 @@ import Toggle from '../../components/Toggle/Toggle';
 import AuthButton from '../../components/Buttons/AuthButton';
 import WelcomeHeader from '../../components/Header/WelcomeHeader';
 import { useAuthStore } from '../../store/useAuthStore';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../../navigation/Router';
 
 const WelcomeScreen: React.FC = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
   const handleLogin = () => setIsAuthenticated(true);
@@ -42,7 +46,7 @@ const WelcomeScreen: React.FC = () => {
         />
         <AuthButton 
           title="Register" 
-          onPress={() => {}} 
+          onPress={() => navigation.navigate('RegisterPage')}
         />
       </View>
     </SafeAreaView>

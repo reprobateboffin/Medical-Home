@@ -1,34 +1,18 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
-import LoadingScreen from './src/screens/Loading/LoadingScreen';
-import AppNavigator from './src/navigation/AppNavigator';
-import WelcomeScreen from './src/screens/Welcome/WelcomeScreen';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
-import { useAuthStore } from './src/store/useAuthStore';
 import { GestureHandlerRootView } from 'react-native-gesture-handler';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack'; // Correct import
-
-import { Button, Pressable, Text, View } from 'react-native';
-import Home from './src/screens/auth/Home';
-import ProvideInformation from './src/screens/auth/ProvideInformation';
-import WantToRegister from './src/screens/auth/WantToRegister';
-import RegisterPage from './src/screens/auth/RegisterPage';
-import RegisterPage2 from './src/screens/auth/RegisterPage2';
-import RegisterVerification from './src/screens/auth/RegisterVerification';
-import VerificationCode from './src/screens/auth/VerificationCode';
-
-const Stack = createNativeStackNavigator(); // Create the stack navigator
+import LoadingScreen from './src/screens/Loading/LoadingScreen';
+import Router from './src/navigation/Router';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const loadAssets = async () => {
     try {
-      // Resimleri önbelleğe al
       const imageAssets = [
         require('./assets/images/welcome.png'),
         require('./assets/images/logo.png'),
@@ -39,10 +23,7 @@ export default function App() {
       });
 
       await Promise.all(loadImages);
-
-      // Diğer başlangıç işlemleri (API çağrıları vb.)
-      await new Promise(resolve => setTimeout(resolve, 2000)); // Demo için 2 saniyelik bekleme
-
+      await new Promise(resolve => setTimeout(resolve, 2000));
       setIsLoading(false);
     } catch (error) {
       console.warn('Yükleme sırasında hata:', error);
@@ -63,22 +44,16 @@ export default function App() {
     );
   }
 
-  if (!isAuthenticated) {
-    return (
-      <GestureHandlerRootView style={{ flex: 1 }}>
-        <WelcomeScreen />
-        <StatusBar style="auto" />
-      </GestureHandlerRootView>
-    );
-  }
-
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
-      <AppNavigator />
+      <NavigationContainer>
+        <Router />
+      </NavigationContainer>
       <StatusBar style="auto" />
     </GestureHandlerRootView>
   );
 }
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,

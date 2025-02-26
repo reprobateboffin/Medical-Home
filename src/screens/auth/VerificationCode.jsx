@@ -1,16 +1,18 @@
 import React, { useState } from 'react';
 import { View, Text, ImageBackground, TextInput, Pressable, StyleSheet, Dimensions } from 'react-native';
 import RadioGroup from 'react-native-radio-buttons-group';
-
-
-
+import { useAuthStore } from '../../store/useAuthStore';
 
 const { height, width } = Dimensions.get('window');
 
 const VerificationCode = ({ navigation }) => {
-
- 
-
+  const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
+  
+  const handleSubmit = async () => {
+    await setIsAuthenticated(true); // Önce authentication'ı güncelle
+    // Sonra navigasyonu yap
+    navigation.navigate('MainTabs');
+  };
 
   return (
     <View style={styles.container}>
@@ -36,7 +38,7 @@ const VerificationCode = ({ navigation }) => {
           {/* Register Button */}
           <Pressable 
             style={styles.registerButton} 
-            onPress={() => navigation.navigate('Home')} // Change to the actual screen name
+            onPress={handleSubmit}
           >
             <Text style={styles.registerButtonText}>Submit</Text>
           </Pressable>
