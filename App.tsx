@@ -1,12 +1,68 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
+import LoadingScreen from './src/screens/Loading/LoadingScreen';
+import BottomTabs from './src/navigation/BottomTabs';
+import WelcomeScreen from './src/screens/Welcome/WelcomeScreen';
+import React, { useState, useEffect } from 'react';
+import * as Font from 'expo-font';
+import { Asset } from 'expo-asset';
+import { useAuthStore } from './src/store/useAuthStore';
 
 export default function App() {
+  const [isLoading, setIsLoading] = useState(true);
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+
+  const loadAssets = async () => {
+    try {
+      // Resimleri önbelleğe al
+      const imageAssets = [
+        require('./assets/images/welcome.png'),
+        require('./assets/images/logo.png'),
+      ];
+
+      const loadImages = imageAssets.map((image) => {
+        return Asset.fromModule(image).downloadAsync();
+      });
+
+      await Promise.all(loadImages);
+
+      // Diğer başlangıç işlemleri (API çağrıları vb.)
+      await new Promise(resolve => setTimeout(resolve, 2000)); // Demo için 2 saniyelik bekleme
+
+      setIsLoading(false);
+    } catch (error) {
+      console.warn('Yükleme sırasında hata:', error);
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadAssets();
+  }, []);
+
+  if (isLoading) {
+    return (
+      <>
+        <LoadingScreen />
+        <StatusBar style="auto" />
+      </>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <>
+        <WelcomeScreen />
+        <StatusBar style="auto" />
+      </>
+    );
+  }
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
+    <>
+      <BottomTabs />
       <StatusBar style="auto" />
-    </View>
+    </>
   );
 }
 
