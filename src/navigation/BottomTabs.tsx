@@ -232,6 +232,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     width: TAB_WIDTH,
     height: 36,
+    marginBottom: 24,
   },
   iconContainer: {
     alignItems: 'center',

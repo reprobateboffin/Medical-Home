@@ -89,6 +89,7 @@ const styles = StyleSheet.create({
     lineHeight: 61,
     color: colors.base.black,
     marginBottom: 28,
+    marginTop: 28,
     textAlign:"center",
     alignSelf: 'center',
   },
@@ -136,7 +137,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     width: 114,
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 80,
   },
   editButtonText: {
     color: colors.base.white,

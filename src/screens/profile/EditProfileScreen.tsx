@@ -42,10 +42,11 @@ const EditProfileScreen: React.FC<EditProfileScreenProps> = () => {
         <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
           <Ionicons name="arrow-back" size={24} color={colors.base.black} />
         </TouchableOpacity>
-        <Text style={styles.title}>Personal Information</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContent}>
+        <Text style={styles.title}>Personal Information</Text>
+
         {/* Profile Image */}
         <View style={styles.profileImageContainer}>
           <TouchableOpacity onPress={pickImage} style={styles.imageWrapper}>
@@ -111,17 +112,19 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingHorizontal: 16,
     paddingVertical: 12,
-    borderBottomWidth: 1,
     borderBottomColor: colors.base.lightGray,
   },
   backButton: {
     padding: 8,
   },
   title: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 'bold',
+    lineHeight: 61,
     color: colors.base.black,
-    marginLeft: 16,
+    marginBottom: 28,
+    textAlign: "center",
+    alignSelf: 'center',
   },
   scrollContent: {
     flexGrow: 1,
@@ -178,9 +181,14 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     backgroundColor: colors.primary.green,
-    paddingVertical: 16,
-    borderRadius: 50,
+    paddingVertical: 10,
+    paddingHorizontal: 36,
+    borderRadius: 12,
+    width: 114,
     alignItems: 'center',
+    marginBottom: 45,
+    marginTop: 45,
+    alignSelf: 'center',
   },
   doneButtonText: {
     color: colors.base.white,
