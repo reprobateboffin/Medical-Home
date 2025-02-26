@@ -14,6 +14,7 @@ export const colors = {
   base: {
     black: "#000000",
     white: "#FFFFFF",
+    lightGray: "rgba(0, 0, 0, 0.3)",
   },
 } as const;
 

@@ -1,12 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import LoadingScreen from './src/screens/Loading/LoadingScreen';
-import BottomTabs from './src/navigation/BottomTabs';
+import AppNavigator from './src/navigation/AppNavigator';
 import WelcomeScreen from './src/screens/Welcome/WelcomeScreen';
 import React, { useState, useEffect } from 'react';
 import * as Font from 'expo-font';
 import { Asset } from 'expo-asset';
 import { useAuthStore } from './src/store/useAuthStore';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
 
 export default function App() {
   const [isLoading, setIsLoading] = useState(true);
@@ -42,30 +43,29 @@ export default function App() {
 
   if (isLoading) {
     return (
-      <>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <LoadingScreen />
         <StatusBar style="auto" />
-      </>
+      </GestureHandlerRootView>
     );
   }
 
   if (!isAuthenticated) {
     return (
-      <>
+      <GestureHandlerRootView style={{ flex: 1 }}>
         <WelcomeScreen />
         <StatusBar style="auto" />
-      </>
+      </GestureHandlerRootView>
     );
   }
 
   return (
-    <>
-      <BottomTabs />
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <AppNavigator />
       <StatusBar style="auto" />
-    </>
+    </GestureHandlerRootView>
   );
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -74,3 +74,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 });
+

@@ -1,6 +1,5 @@
 import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { NavigationContainer } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import { View, Text, StyleSheet, Animated, ViewStyle, Vibration } from 'react-native';
 import { BottomTabNavigationOptions } from '@react-navigation/bottom-tabs';
@@ -10,6 +9,7 @@ import { colors } from '../theme/colors';
 // Screens
 import HomeScreen from '../screens/tabs/HomeScreen';
 import CalendarScreen from '../screens/tabs/CalendarScreen';
+import ProfileScreen from '../screens/tabs/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 
@@ -171,55 +171,53 @@ const tabBarOptions: BottomTabNavigationOptions = {
 const BottomTabs = () => {
   return (
     <View style={styles.container}>
-      <NavigationContainer>
-        <Tab.Navigator screenOptions={tabBarOptions}>
-          <Tab.Screen
-            name="Home"
-            component={HomeScreen}
-            options={{
-              tabBarIcon: ({ focused }) => (
-                <CustomTabBarIcon name="home-outline" focused={focused} title="Home" />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="History"
-            component={CalendarScreen}
-            options={{
-              tabBarIcon: ({ focused }) => (
-                <CustomTabBarIcon name="time-outline" focused={focused} title="History" />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Calendar"
-            component={CalendarScreen}
-            options={{
-              tabBarIcon: ({ focused }) => (
-                <CustomTabBarIcon name="calendar-outline" focused={focused} title="Calendar" />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Call"
-            component={HomeScreen}
-            options={{
-              tabBarIcon: ({ focused }) => (
-                <CustomTabBarIcon name="call-outline" focused={focused} title="Call" />
-              ),
-            }}
-          />
-          <Tab.Screen
-            name="Profile"
-            component={HomeScreen}
-            options={{
-              tabBarIcon: ({ focused }) => (
-                <CustomTabBarIcon name="person-outline" focused={focused} title="Profile" />
-              ),
-            }}
-          />
-        </Tab.Navigator>
-      </NavigationContainer>
+      <Tab.Navigator screenOptions={tabBarOptions}>
+        <Tab.Screen
+          name="Home"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <CustomTabBarIcon name="home-outline" focused={focused} title="Home" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="History"
+          component={CalendarScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <CustomTabBarIcon name="time-outline" focused={focused} title="History" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Calendar"
+          component={CalendarScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <CustomTabBarIcon name="calendar-outline" focused={focused} title="Calendar" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Call"
+          component={HomeScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <CustomTabBarIcon name="call-outline" focused={focused} title="Call" />
+            ),
+          }}
+        />
+        <Tab.Screen
+          name="Profile"
+          component={ProfileScreen}
+          options={{
+            tabBarIcon: ({ focused }) => (
+              <CustomTabBarIcon name="person-outline" focused={focused} title="Profile" />
+            ),
+          }}
+        />
+      </Tab.Navigator>
     </View>
   );
 };
