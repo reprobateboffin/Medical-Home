@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text, ImageBackground, TouchableOpacity, StyleSheet, Dimensions, Image, Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons'; // Icons (Use react-native-vector-icons if not using Expo)
-import SvgUri from 'react-native-svg-uri'; // Import the SvgUri component
-import Svg, { Path } from 'react-native-svg'; // Updated import
+import Svg from 'react-native-svg'; // Updated import
 
 const { height, width } = Dimensions.get('window');
 
@@ -19,7 +18,7 @@ const WantToRegister = ({ navigation }) => {
         <View style={styles.overlay}>
           {/* Small Image */}
           {/* <Image source={require('../../../assets/titleanddescpwp.png')} style={styles.smallImage} /> */}
-          <SvgUri
+          <Svg
         width={50}
         height={30}
         style={{ marginBottom: 20,  padding: 0}}

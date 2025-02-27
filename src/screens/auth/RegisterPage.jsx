@@ -1,6 +1,6 @@
 import React from 'react';
 import { View, Text, ImageBackground, TextInput, Pressable, StyleSheet, Dimensions } from 'react-native';
-import SvgUri from 'react-native-svg-uri'; // Import the SvgUri component
+import Svg from 'react-native-svg';
 
 const { height, width } = Dimensions.get('window');
 
@@ -28,7 +28,7 @@ const RegisterPage = ({ navigation }) => {
             placeholder="Choose Your Clinic"
             placeholderTextColor="#ddd"
           />
-       <SvgUri
+       <Svg
         width={250}
         height={50}
         style={{ marginBottom: 20,  padding: 0}}
