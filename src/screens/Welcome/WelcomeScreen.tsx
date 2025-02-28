@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, Image, SafeAreaView } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, StyleSheet, Image, SafeAreaView, Animated } from 'react-native';
 import { colors } from '../../theme/colors';
 import Toggle from '../../components/Toggle/Toggle';
 import AuthButton from '../../components/Buttons/AuthButton';
@@ -13,9 +13,52 @@ const WelcomeScreen: React.FC = () => {
   const [isEnabled, setIsEnabled] = useState(false);
   const setIsAuthenticated = useAuthStore((state) => state.setIsAuthenticated);
   const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
+  const fadeAnim1 = new Animated.Value(1);
+  const fadeAnim2 = new Animated.Value(0);
 
   const toggleSwitch = () => setIsEnabled(previousState => !previousState);
-  const handleLogin = () => setIsAuthenticated(true);
+  
+  // Temporarily navigate to Dashboard for development
+  const handleLogin = () => {
+    // Geçici olarak authentication'ı kaldırıyoruz
+    // setIsAuthenticated(true);
+    navigation.navigate('DashboardScreen');
+  };
+
+  useEffect(() => {
+    const animate = () => {
+      Animated.sequence([
+        Animated.parallel([
+          Animated.timing(fadeAnim1, {
+            toValue: 0,
+            duration: 3000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(fadeAnim2, {
+            toValue: 1,
+            duration: 3000,
+            useNativeDriver: true,
+          }),
+        ]),
+        Animated.delay(4000),
+        Animated.parallel([
+          Animated.timing(fadeAnim1, {
+            toValue: 1,
+            duration: 3000,
+            useNativeDriver: true,
+          }),
+          Animated.timing(fadeAnim2, {
+            toValue: 0,
+            duration: 3000,
+            useNativeDriver: true,
+          }),
+        ]),
+        Animated.delay(4000),
+      ]).start(() => animate());
+    };
+
+    animate();
+  }, []);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -31,9 +74,14 @@ const WelcomeScreen: React.FC = () => {
       />
 
       <View style={styles.imageContainer}>
-        <Image
+        <Animated.Image
           source={require('../../../assets/images/welcome.png')}
-          style={styles.welcomeImage}
+          style={[styles.welcomeImage, { opacity: fadeAnim1, position: 'absolute' }]}
+          resizeMode="contain"
+        />
+        <Animated.Image
+          source={require('../../../assets/images/doctor-patient.png')}
+          style={[styles.welcomeImage, { opacity: fadeAnim2, position: 'absolute' }]}
           resizeMode="contain"
         />
       </View>
@@ -72,6 +120,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: 20,
+    position: 'relative',
   },
   welcomeImage: {
     width: '100%',

@@ -12,7 +12,8 @@ import RegisterPage2 from '../screens/auth/RegisterPage2';
 import VerificationCode from '../screens/auth/VerificationCode';
 import RegisterVerification from '../screens/auth/RegisterVerification';
 import WantToRegister from '../screens/auth/WantToRegister';
-import HomeScreen from '../screens/tabs/HomeScreen';
+import DashboardScreen from '../screens/dashboard/DashboardScreen';
+import DashboardEventsScreen from '../screens/dashboard/DashboardEventsScreen';
 
 export type RootStackParamList = {
   Welcome: undefined;
@@ -24,7 +25,8 @@ export type RootStackParamList = {
   RegisterVerification: undefined;
   VerificationCode: undefined;
   WantToRegister: undefined;
-  HomeScreen: undefined;
+  DashboardScreen: undefined;
+  DashboardEventsScreen: undefined;
 };
 
 const Stack = createStackNavigator<RootStackParamList>();
@@ -43,8 +45,8 @@ const Router = () => {
           <Stack.Screen name="RegisterVerification" component={RegisterVerification} />
           <Stack.Screen name="VerificationCode" component={VerificationCode} />
           <Stack.Screen name="WantToRegister" component={WantToRegister} />
-          <Stack.Screen name="HomeScreen" component={HomeScreen} />
-
+          <Stack.Screen name="DashboardScreen" component={DashboardScreen} />
+          <Stack.Screen name="DashboardEventsScreen" component={DashboardEventsScreen} />
         </>
       ) : (
         <>
